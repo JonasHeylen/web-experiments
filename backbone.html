@@ -21,6 +21,7 @@ $(function() {
     var someUser = new User;
     
     var UserView = Backbone.View.extend({
+        template: Handlebars.compile($("#userTemplate").html()),
         initialize: function() {
             this.model.bind('change', this.render, this);
         },
@@ -31,11 +32,7 @@ $(function() {
             this.model.set({"name": $("#name").val()});
         },
         render: function() {
-            var greeting = document.createElement("p");
-            $(greeting).text("Hello " + this.model.get("name") + "!");
-            var form = document.createElement("div");
-            $(form).html('<input id="name"> <button id="setname" class="btn">Set name</button>');
-            $(this.el).empty().append(greeting).append(form);
+            $(this.el).html(this.template(this.model.toJSON()))
             return this;
         }
     });
@@ -64,5 +61,9 @@ $(function() {
         <p>&copy; Jonas Heylen</p>
       </footer>
     </div>
+    <script type="text/x-mustache-template" id="userTemplate">
+        <p>Hello {{name}}!</p>
+        <input id="name"> <button id="setname" class="btn">Set name</button>
+    </script>
 </body>
 </html>
