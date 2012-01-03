@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Experimenting with Backbone.js and Handlebars.js. Also, Bootstrap. -->
+<meta charset="utf-8">
+<title>backbone + handlebars</title>
+<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.2/underscore-min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js"></script>
+<script>
+$(function() {
+    var User = Backbone.Model.extend({
+        defaults: function() {
+            return {
+                name: "Anonymous"
+            };
+        }
+    });
+    var someUser = new User;
+    
+    var UserView = Backbone.View.extend({
+        initialize: function() {
+            this.model.bind('change', this.render, this);
+        },
+        events: {
+            "click #setname": "setName"
+        },
+        setName: function() {
+            this.model.set({"name": $("#name").val()});
+        },
+        render: function() {
+            var greeting = document.createElement("p");
+            $(greeting).text("Hello " + this.model.get("name") + "!");
+            var form = document.createElement("div");
+            $(form).html('<input id="name"> <button id="setname" class="btn">Set name</button>');
+            $(this.el).empty().append(greeting).append(form);
+            return this;
+        }
+    });
+    var someUserView = new UserView({el: $("#stuff"), model: someUser});
+    
+    someUser.set({"name": "Jonas Heylen"});
+});
+</script>
+</head>
+<body>
+    <div class="container">
+      <div class="content">
+        <div class="page-header">
+          <h1>backbone + handlebars</h1>
+        </div>
+        <div class="row">
+          <div class="span10">
+            <div id="stuff"></div>  
+          </div>
+          <div class="span6">
+            
+          </div>
+        </div>
+      </div>
+      <footer>
+        <p>&copy; Jonas Heylen</p>
+      </footer>
+    </div>
+</body>
+</html>
