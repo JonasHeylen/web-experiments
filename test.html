@@ -3,31 +3,12 @@
     <head> 
         <title>Jumping Turtle</title> 
         <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.2/underscore-min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     </head> 
     <body> 
     <script>
     $(function() {
         var appID = "224650967612466";
-        
-        var User = Backbone.Model.extend({
-            initialize : function(models, options) {
-                this.accessToken = options.accessToken;
-            },
-            url: function() {
-                return "https://graph.facebook.com/me?"+this.accessToken+"&callback=?";
-            }
-        });
-        
-        var UserView = Backbone.View.extend({
-            tagName: "p",
-            className: "userName",
-            render: function() {
-                $(this.el).text("Hi, " + this.model.get("name"));
-                return this;
-            }
-        });
     
         function displayUser(user) {
             $('#userName').text('Hi, '+ user.name + '.');
@@ -69,15 +50,8 @@
             window.location = url;
         } else {
             var accessToken = window.location.hash.substring(1);
-            /*fb("https://graph.facebook.com/me", accessToken, function(data) {
+            fb("https://graph.facebook.com/me", accessToken, function(data) {
                 displayUser(data);
-            });*/
-            var fbUser = new User([], {accessToken: accessToken});
-            var fbUserView = new UserView({el: $("#app"), model: fbUser});
-            fbUser.fetch({
-                success : function(data) {
-                    $('#app').html(fbUserView.render().el);
-                }
             });
             fb("https://graph.facebook.com/me/photos", accessToken, function(data) {
                 displayPhotos(data);
@@ -85,8 +59,8 @@
         }
     });
     </script>
-    <div id="app">
-    </div>
+    <p id="userName">
+    </p>
     <div id="photos"></div>
     </body> 
 </html>
