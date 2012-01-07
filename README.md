@@ -14,6 +14,17 @@ Also, [Bootstrap][bootstrap].
 Cloud9 IDE test project. Experimenting with [Underscore.js][underscore] and
 the [Facebook Graph API][fbapi]. 
 
+## less.html
+
+Using [Less][less] and Twitter's [Bootstrap][bootstrap]. You can use Less
+client-side by including the less.js script or server-side.
+
+Server-side you install Less with `npm install less`. This way you can call it
+from [Node.js][node] code or from the command line with the `lessc` command.
+
+There also exists [a Less plugin for Maven][lessmaven] that you can use in Java 
+projects.
+
 
 
 [gcdn]: http://code.google.com/apis/libraries/
@@ -23,3 +34,6 @@ the [Facebook Graph API][fbapi].
 [handlebars]: https://github.com/wycats/handlebars.js
 [bootstrap]: http://twitter.github.com/bootstrap/
 [fbapi]: https://developers.facebook.com/docs/reference/api/
+[less]: http://lesscss.org/
+[node]: http://nodejs.org/
+[lessmaven]: http://code.google.com/p/maven-less-plugin/
