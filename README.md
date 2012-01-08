@@ -29,6 +29,7 @@ projects.
 
 # To Do
 
+* CoffeeScript
 * Node.js
 * Express
 * Bones

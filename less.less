@@ -1,3 +1,74 @@
+@blue:  #08b5fb;
+@green: #46a546;
+@red:   #9d261d;
+
 body {
     margin-top: 50px;
+}
+
+.glow {
+    color: white;
+    text-shadow:0 0 10px @red;
+}
+
+.transition(@property: all, @time: 0.5s) {
+    -moz-transition: @property @time; 
+    -webkit-transition: @property @time;  
+    -ms-transition: @property @time;  
+    -o-transition: @property @time;  
+    transition: @property @time; 
+}
+
+ul {
+    .transition(all, 0.1s);
+    
+    &:hover {
+        .glow;
+    }
+    
+    .one {
+        color: @red;
+    }
+    .two {
+        color: @green;
+    }
+    .three {
+        color: @blue;
+    }
+}
+
+ol {
+    .transition;
+    
+    &:hover {
+        .glow;
+    }
+    
+    .one {
+        color: @green;
+    }s
+    .two {
+        color: @blue;
+    }
+    .three {
+        color: @red;
+    }
+}
+
+.paras {
+    .transition(all, 1s);
+    
+    &:hover {
+        .glow;
+    }
+    
+    .one {
+        color: desaturate(@red, 10%);
+    }
+    .two {
+        color: desaturate(@red, 30%);
+    }
+    .three {
+        color: desaturate(@red, 50%);
+    }
 }
